@@ -33,16 +33,17 @@ Necesitamos seleccionar la capa vectorial (cuya geometría sea de tipo línea) d
  ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen6.png )
   Comenzamos a trazar la linea uniento los puntos que creamos en el paso anterior
  ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen8.png )
+  ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen9.png )
   Si decidiste etiquetar la línea con algún id para la tabla de atributos, llenas la información requerida
- ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen9.png )
+ ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen10.png )
  
  
 ### 4. Nos dirigiremos al icono de herramientas, y buscaremos la herramienta “Drape” esta nos ayudará a asociar un dato de elevación para cada punto de la línea que dibujamos. Exportamos esta capa en formato geojson. Y hacemos el tratamiento correspondiente para poder agregar la capa vectorial al código. 
-![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen10.png )
- Seleccionamos la línea ala que queremos añadir la información de la elevación y la capa ráster de la que se obtendrá la elevación
 ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen11.png )
- Obtendremos una nueva línea, en este caso con las alturas incluidas, para verificar esto asegurate de que la capa incluya la siguiente leyenda 
+ Seleccionamos la línea ala que queremos añadir la información de la elevación y la capa ráster de la que se obtendrá la elevación
 ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen12.png )
+ Obtendremos una nueva línea, en este caso con las alturas incluidas, para verificar esto asegurate de que la capa incluya la siguiente leyenda 
+![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen13.png )
 
 ### 5.  Declaramos el estilo de esta capa en la sección correspondiente. 
 
