@@ -37,10 +37,85 @@ Necesitamos seleccionar la capa vectorial (cuya geometría sea de tipo línea) d
  ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen8.png )
  
  
-### Nos dirigiremos al icono de herramientas, y buscaremos la herramienta “Drape” esta nos ayudará a asociar un dato de elevación para cada punto de la línea que dibujamos. Exportamos esta capa en formato geojson. Y hacemos el tratamiento correspondiente para poder agregar la capa vectorial al código. 
+### 4. Nos dirigiremos al icono de herramientas, y buscaremos la herramienta “Drape” esta nos ayudará a asociar un dato de elevación para cada punto de la línea que dibujamos. Exportamos esta capa en formato geojson. Y hacemos el tratamiento correspondiente para poder agregar la capa vectorial al código. 
 ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen9.png )
-Seleccionamos la línea ala que queremos añadir la información de la elevación y la capa ráster de la que se obtendrá la elevación
+ Seleccionamos la línea ala que queremos añadir la información de la elevación y la capa ráster de la que se obtendrá la elevación
 ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen10.png )
-Obtendremos una nueva línea, en este caso con las alturas incluidas, para verificar esto asegurate de que la capa incluya la siguiente leyenda 
+ Obtendremos una nueva línea, en este caso con las alturas incluidas, para verificar esto asegurate de que la capa incluya la siguiente leyenda 
 ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen11.png )
+
+### 5.  Declaramos el estilo de esta capa en la sección correspondiente. 
+
+``` html
+<!-- ------ ESTILOS PARA CAPAS VECTORIALES ------ -->
+
+	var seccion_style = {
+		    "color": "#000000",
+		    "weight": 5,
+		};
+	
+```
+
+ Agregamos la capa al código verificamos que se haya cargado correctamente.
+
+``` html
+<!-- ------ ESTILOS PARA CAPAS VECTORIALES ------ -->
+
+	var seccion_style = {
+		    "color": "#000000",
+		    "weight": 5,
+		};
+	
+```
+
+### 6. Para agregar el plugin
+Te recomendamos vayas a esta liga https://github.com/jlgrandes/Example_Leaflet-Elevation descargues el proyecto, o si lo prefieres solamente los archivos que sean necesarios. Descomprimimos y abrimos la carpeta, Necesitamos guardar los archivos leaflet-elevation.css y
+leaflet-elevation.js  en la carpeta de DATA, donde se encuentran los demás archivos auxiliares de nuestro proyecto.  Abrimos el archivo llamado ExampleLeafletElevation-geojson.html en nuestro procesador de textos, (en este caso Notepad++)  Hay que leer el código y analizar que líneas de código necesitamos incluir en nuestro proyecto. 
+
+## De arriba hacia abajo necesitamos incluir las siguientes líneas en el head de nuestro proyecto
+
+En <head>, Las librerías de d3, la hoja de estilos de estilos para la sección.
+ 
+ ``` html
+ 	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<link rel="stylesheet" href="DATA/leaflet-elevation.css" />
+	<script type="text/javascript" src="DATA/leaflet-elevation.js"></script>
+ ```
+  
+En <body>, una etiqueta div que contenga la sección.
+
+``` html
+<div id="mapDIV"></div>
+<div id="elevation-div"></div>
+```
+
+Y al final del código agregaremos una nueva sección con las líneas de código que pertenecen al plugin en si
+ 
+ ``` html
+<!-- PLUGINS: PERFIL DE ELEVACIÓN LONGITUDINAL -->
+ <script>
+		var el = L.control.elevation({
+  			position: "bottomleft",
+            theme: "steelblue-theme", //default: lime-theme
+            useHeightIndicator: true, //if false a marker is drawn at map position
+            interpolation: d3.curveLinear, //see https://github.com/d3/d3/wiki/
+            collapsed: false, //collapsed mode, show chart on click or mouseover
+            detachedView: true, //if false the chart is drawn within map container
+            elevationDiv: "#elevation-div", // (detached) elevation chart container
+			});
+		el.addTo(map);
+		
+		var seccion = L.geoJson(seccion,{
+			style:seccion_style,
+		    onEachFeature: el.addData.bind(el)
+		}).addTo(map);
+  </script>
+
+```
+
+### 7.Ejecutamos en el navegador, y deberíamos  visualizar algo como lo siguiente
+![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen12png )
+
+
+
 
