@@ -42,30 +42,35 @@ Necesitamos seleccionar la capa vectorial (cuya geometría sea de tipo línea) d
 ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen11.png )
  Seleccionamos la línea ala que queremos añadir la información de la elevación y la capa ráster de la que se obtendrá la elevación
 ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen12.png )
- Obtendremos una nueva línea, en este caso con las alturas incluidas, para verificar esto asegurate de que la capa incluya la siguiente leyenda 
 ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen13.png )
+ Obtendremos una nueva línea, en este caso con las alturas incluidas, para verificar esto asegurate de que la capa incluya la siguiente leyenda 
+![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen14.png )
 
 ### 5.  Declaramos el estilo de esta capa en la sección correspondiente. 
 
 ``` html
+<script>
 <!-- ------ ESTILOS PARA CAPAS VECTORIALES ------ -->
 
 	var seccion_style = {
 		    "color": "#000000",
 		    "weight": 5,
 		};
+</script>
 	
 ```
 
  Agregamos la capa al código verificamos que se haya cargado correctamente.
 
 ``` html
+<script>
 <!-- ------ ESTILOS PARA CAPAS VECTORIALES ------ -->
 
 	var seccion_style = {
 		    "color": "#000000",
 		    "weight": 5,
 		};
+</script>
 	
 ```
 
