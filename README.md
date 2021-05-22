@@ -118,6 +118,150 @@ Y al final del código agregaremos una nueva sección con las líneas de código
   </script>
 
 ```
+### Asi debería verse tu codigo.
+``` html
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Mapa E14C17_2</title>
+	
+	<!-- -----LIBRERIAS-------- -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+	integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+	crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+	integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+	crossorigin=""></script>
+	
+	
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<link rel="stylesheet" href="DATA/leaflet-elevation.css" />
+	<script type="text/javascript" src="DATA/leaflet-elevation.js"></script>
+	
+	<!-- -----CAPAS JSON------ -->
+	
+	
+	<script type="text/javascript" src="DATA/json/Geología_PeñaDe Bernal_GCS.js"></script>
+	<script type="text/javascript" src="DATA/json/contact.js"></script>
+	<script type="text/javascript" src="DATA/json/seccion.js"></script>
+	
+	
+	
+	
+	<!-- -----ESTILOS DEL MAPA------ -->
+	<style>
+	#mapDIV {
+	height: 100%;
+	width: 100%;
+	border: solid 2px black;
+	}
+	</style>
+</head>
+
+<body>
+<div id="mapDIV"></div>
+<div id="elevation-div"></div>
+
+ <script>	
+ <!-- ------ CARACTERISTICAS DEL MAPA------ -->
+ var map = L.map('mapDIV', {
+		center:[20.83748 , -99.71396],
+		zoom:11
+	});
+	
+	
+	var scale = L.control.scale({
+		'imperial':false
+	});
+	scale.addTo(map);
+	
+<!-- ------ ESTILOS PARA CAPAS VECTORIALES ------ -->
+	
+	var contact_style = {
+		color: "#000000",
+		weight: 2,
+		opacity: 1,
+	};
+	
+	var seccion_style = {
+		    "color": "#000000",
+		    "weight": 5,
+		};
+	
+<!-- ------CAPAS BASE------ -->
+	
+	var osm = L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
+	{attribution: 'Map Data &copy; OpenStreetMap contributors'
+	});
+	osm.addTo(map);
+	
+	var topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+	maxZoom: 17,
+	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+	}); 
+	topo.addTo(map);
+	
+	var sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+	});
+
+<!-- ----- CONTROLADOR DEL MAPA------	 -->
+	var basemaps = {
+		"OSM": osm,
+		"Topografía": topo,										
+		"Satélite": sat
+		};
+	L.control.layers(basemaps).addTo(map);
+	
+<!-- ----- CAPAS VECTORIALES------	 -->
+	var geology = L.geoJson(geology, {
+	style:function(feature){
+			switch (feature.properties.CLAVE){
+				case 'Qhoal': return {color:'#fff5dd',fillOpacity: .5};
+				case 'Qhoco': return {color:'#f7ece1',fillOpacity: .5};			
+				case 'TplQptB': return {color:'#bf9487',fillOpacity: .5};
+				case 'TplQptCgp-Ar': return {color:'#eedfb3',fillOpacity: .5};
+				case 'TeGd-D': return {color:'#ed1c24',fillOpacity: .5};
+				case 'TeoCgp': return {color:'#d8e9b9',fillOpacity: .5}; 
+				case 'TmplA-B': return {color:'#fbc9bc',fillOpacity: .5};
+				case 'TplA-Da': return {color:'#e4c19b',fillOpacity: .5};
+				case 'TplR-TR': return {color:'#f9b6ac',fillOpacity: .5};
+				case 'TplTR-TDa': return {color:'#f7b9d4',fillOpacity: .5};
+				case 'ToR-TR': return {color:'#e1a49c',fillOpacity: .5};
+				case 'KapceCz-Bro': return {color:'#00ac4e',fillOpacity: .5};	
+				case 'KiCz-Lu': return {color:'#5f7641',fillOpacity: .5};
+				case 'KsLu-Cz': return {color:'#698c42',fillOpacity: .5};
+				case 'JtKvLu-Cz': return {color:'#76cdd6',fillOpacity: .5};	
+			}}
+			}).addTo(map);
+	
+	var contact = L.geoJson(contact,{
+		style: contact_style
+		}).addTo (map);
+		
+<!-- PLUGINS: PERFIL DE ELEVACIÓN LONGITUDINAL -->
+
+
+		var el = L.control.elevation({
+  			position: "bottomleft",
+            theme: "steelblue-theme", //default: lime-theme
+            useHeightIndicator: true, //if false a marker is drawn at map position
+            interpolation: d3.curveLinear, //see https://github.com/d3/d3/wiki/
+            collapsed: false, //collapsed mode, show chart on click or mouseover
+            detachedView: true, //if false the chart is drawn within map container
+            elevationDiv: "#elevation-div", // (detached) elevation chart container
+			});
+		el.addTo(map);
+		
+		var seccion = L.geoJson(seccion,{
+			style:seccion_style,
+		    onEachFeature: el.addData.bind(el)
+		}).addTo(map);
+	 
+ </script>
+</body>
+</html>
+```
 
 ### 7.Ejecutamos en el navegador, y deberíamos  visualizar algo como lo siguiente
 ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen18.png )
