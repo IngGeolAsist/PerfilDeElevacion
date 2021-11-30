@@ -267,5 +267,5 @@ Y al final del código agregaremos una nueva sección con las líneas de código
 ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen18.png )
 
 
-
+Haz click en el siguiente enlace para volver a la pagina inicial https://github.com/IngGeolAsist/ComoCrearMapasEnLaWebConLeaflet
 
