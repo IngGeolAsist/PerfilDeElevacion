@@ -40,7 +40,7 @@ Necesitamos seleccionar la capa vectorial (cuya geometría sea de tipo línea) d
  
 ### 4. Nos dirigiremos al icono de herramientas, y buscaremos la herramienta “Drape” esta nos ayudará a asociar un dato de elevación para cada punto de la línea que dibujamos. Exportamos esta capa en formato geojson. Y hacemos el tratamiento correspondiente para poder agregar la capa vectorial al código. 
 ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen11.png )
- Seleccionamos la línea ala que queremos añadir la información de la elevación y la capa ráster de la que se obtendrá la elevación
+ Seleccionamos la línea a la que queremos añadir la información de la elevación y la capa ráster de la que se obtendrá la elevación
 ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen12.png )
 ![screenshot](https://raw.githubusercontent.com/sampach95/PerfilDeElevacion/master/img/Imagen13.png )
  Obtendremos una nueva línea, en este caso con las alturas incluidas, para verificar esto asegurate de que la capa incluya la siguiente leyenda 
